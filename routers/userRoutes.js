@@ -6,7 +6,7 @@ const {
   getUser,
   userLogin,
   currentUser,
-} = require("../controller/StaffController");
+} = require("../controller/UserContoller");
 const validateToken = require("../middleware/validateTokenHandler");
 
 //router.post("/register", registerUSer);

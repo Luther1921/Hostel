@@ -12,9 +12,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/house", houseRouter);
 app.use("/user", userRouter);
-app.use(errorHandler);
+
 connectDB();
 
 app.listen(2000, () => {
   console.log("server is up and running");
 });
+
+app.use(errorHandler);

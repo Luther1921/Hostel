@@ -1,4 +1,3 @@
-const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../model/User");
@@ -36,6 +35,7 @@ const userLogin = asyncHandler(async (req, res) => {
     res.status(400).json({ error: "all fields are mandatory" });
   const user = await User.findOne({ email });
   //compare password with hashed password
+  if (!user) res.status(400).json({ error: "user not found" });
   if (user && (await bcrypt.compare(password, user.password))) {
     const accessToken = jwt.sign(
       {
@@ -50,6 +50,7 @@ const userLogin = asyncHandler(async (req, res) => {
     );
     res.status(200).json({ accessToken });
     res.status(401).json({ error: "email or password is not valid" });
+    next(error);
   }
 });
 
