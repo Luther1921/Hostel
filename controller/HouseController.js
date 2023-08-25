@@ -114,7 +114,7 @@ const updateHouse = asyncHandler(async (req, res) => {
 
   if (house.user_id.toString() !== req.user.id) {
     res.status(403);
-    throw new Error("user don't have permission to update other user");
+    throw new Error("user don't have permission to update other user's room!");
   }
   const updatedHouse = await House.findById(id);
   return res
@@ -133,7 +133,7 @@ const deleteHouse = asyncHandler(async (req, res) => {
       .json({ error: `cannot find the occupant with the ID ${id}` });
   if (house.user_id.toString() !== req.user.id) {
     res.status(403);
-    throw new Error("user don't have permission to delete other user");
+    throw new Error("user don't have permission to delete other user's room!");
   }
   return res.status(200).json({ message: "deleted successfully" });
 });
